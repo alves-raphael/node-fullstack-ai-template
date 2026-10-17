@@ -3,7 +3,7 @@
 Fastify + TypeScript (strict) + Zod + Drizzle/Postgres + Better Auth. Global rules, commands and the environment runbook are in the root `CLAUDE.md`.
 
 ## Contract first
-`openapi.json` (this folder) is the machine-readable description of every endpoint: params, bodies, responses per status code, and `x-source-file` pointing at the implementing file. **Read it to understand the API instead of walking the route code.** It is generated: run `yarn api:openapi` after any route or schema change. `yarn verify` fails if it is stale.
+`openapi.json` (this folder) is the machine-readable description of every endpoint: params, bodies, responses per status code, auth. **Read it to understand the API instead of walking the route code.** To find the code of an operation, search for its `operationId` (`grep -r listTasks apps/api/src`). It is generated: run `yarn api:openapi` after any route or schema change. `yarn verify` fails if it is stale.
 
 ## Layout
 `src/modules/<feature>/{routes.ts,schemas.ts,service.ts,<feature>.test.ts}`. `src/app.ts` builds the app (testable with `app.inject`), `src/server.ts` listens, `src/env.ts` validates env with Zod. Copy `modules/me` as the reference pattern (auth, schemas, all response codes, tests); `modules/health` is the minimal one.

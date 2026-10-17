@@ -15,5 +15,5 @@ Following this pattern keeps `openapi.json` accurate and complete, which is what
 3. Protect it with `requireAuth` unless the spec says it is public.
 4. If the database changes: edit `src/db/schema.ts`, then `yarn db:generate` and `yarn db:migrate`. Never edit an applied migration.
 5. Write the Vitest test (`app.inject`): success, validation failure, auth failure.
-6. Run `yarn api:openapi` and check the new operation appears with its `x-source-file`.
+6. Run `yarn api:openapi` and check the new operation appears with its unique `operationId` and a response for every status code.
 7. Run `yarn verify`.

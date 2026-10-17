@@ -4,7 +4,7 @@ Stack: Fastify, TypeScript strict, Zod, Drizzle + PostgreSQL, Better Auth, `@fas
 
 ## Structure by feature
 
-`src/modules/<feature>/{routes.ts,schemas.ts,service.ts,<feature>.test.ts}`. `src/app.ts` builds and returns the Fastify instance (no listening, so tests can use `inject`); `src/server.ts` only reads env and listens. `src/env.ts` is the only reader of `process.env`. Predictable folders make search easy and give `x-source-file` a stable meaning.
+`src/modules/<feature>/{routes.ts,schemas.ts,service.ts,<feature>.test.ts}`. `src/app.ts` builds and returns the Fastify instance (no listening, so tests can use `inject`); `src/server.ts` only reads env and listens. `src/env.ts` is the only reader of `process.env`. Predictable folders and a unique `operationId` per route make the code of any endpoint one search away (`grep -r <operationId> apps/api/src`), which is why the OpenAPI file does not carry source paths.
 
 ## Zod as the single source of truth
 
@@ -14,7 +14,7 @@ Use `fastify-type-provider-zod` (set `validatorCompiler`, `serializerCompiler`, 
 
 - `@fastify/swagger` with the Zod transform, plus `@fastify/swagger-ui` at `/docs` for humans.
 - Every route declares: `operationId`, `tags`, `summary`/`description`, `params`/`querystring`/`body`, and a `response` entry per status code it can return (success and errors), each with a body schema.
-- Add the source file of each route in a custom `x-source-file` field (verified: `schema: { ..., ...{ 'x-source-file': 'apps/api/src/modules/x/routes.ts' } }` reaches `openapi.json` with `@fastify/swagger` 9 and `fastify-type-provider-zod` 7; hide the Better Auth catch-all route with `schema: { hide: true }`) (path relative to repo root). If the swagger plugin version does not pass custom `x-` route fields through, generate it in a small post-processing step in `scripts/` using a route registry instead; the requirement is that the committed `openapi.json` tells the reader which file implements each operation.
+- `operationId` is mandatory, unique and descriptive (`listTasks`, `createTask`); it is the key an agent greps to find the implementing code. Do not add source file paths to the document: they are hand-maintained, go stale on renames, and a search finds the route faster than they would. Hide the Better Auth catch-all route from the document with `schema: { hide: true }`.
 - `yarn api:openapi` boots the app (without listening), calls `app.swagger()` and writes `apps/api/openapi.json`, pretty-printed and with stable key order so diffs are meaningful. `yarn api:openapi --check` exits non-zero if the file on disk differs from the generated one; `yarn verify` and CI use it.
 - The file is committed. Agents read it instead of walking the route code; they must never edit it by hand.
 

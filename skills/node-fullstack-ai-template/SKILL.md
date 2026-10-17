@@ -35,7 +35,10 @@ The default mode is "everything in Docker". The hybrid mode (db in Docker, api/w
 
 ## Assets (copy, then fill placeholders)
 
-- `assets/CLAUDE.root.md`, `assets/CLAUDE.api.md`, `assets/CLAUDE.web.md`: the three layered context files. Root holds global rules; api/web hold only what is specific to them.
+- The three layered context files. Root holds global rules; api/web hold only what is specific to them. The `.root`/`.api`/`.web` suffixes only tell the templates apart here; in the generated project every file must be named exactly `CLAUDE.md`, because that is the only name Claude Code loads:
+  - `assets/CLAUDE.root.md` -> `CLAUDE.md`
+  - `assets/CLAUDE.api.md` -> `apps/api/CLAUDE.md`
+  - `assets/CLAUDE.web.md` -> `apps/web/CLAUDE.md`
 - `assets/spec-template.md` -> `docs/specs/_template.md`.
 - `assets/skills/implement-spec/SKILL.template.md` -> `.claude/skills/implement-spec/SKILL.md`, and `assets/skills/new-endpoint/SKILL.template.md` -> `.claude/skills/new-endpoint/SKILL.md` (note the rename: the `.template` suffix keeps tools such as `gh skill` from treating these assets as installable skills of this repository). They are project skills: they travel with the generated repo (nobody installs them separately), the model can trigger them from natural language, and they can also be invoked as `/implement-spec <name>` and `/new-endpoint ...`.
 - `assets/claude-settings.json` -> `.claude/settings.json` (pre-approved safe commands).

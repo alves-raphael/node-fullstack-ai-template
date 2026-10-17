@@ -10,7 +10,7 @@ A blank project from which a coding agent can go from "implement spec X, run it 
 
 **Layered `CLAUDE.md` (root, api, web).** Each file holds only what is specific to its location, so the agent loads the minimum relevant context. Global rules (strict TypeScript, Playwright for user flows, Conventional Commits, pitfalls) live in the root.
 
-**OpenAPI committed at `apps/api/openapi.json`.** It sits in the api workspace because it describes the api, and it is committed so an agent can read the whole contract (params, bodies, every status code, implementing file via `x-source-file`) without walking route code. It is generated, never edited, and `yarn verify` fails when stale.
+**OpenAPI committed at `apps/api/openapi.json`.** It sits in the api workspace because it describes the api, and it is committed so an agent can read the whole contract (params, bodies, every status code, auth) without walking route code. It is generated, never edited, and `yarn verify` fails when stale. It deliberately carries no source file paths: they would be hand-maintained and go stale, and a unique `operationId` already lets an agent find the code with one search.
 
 **Zod as the single source of truth.** Validation, TypeScript types and the OpenAPI document come from the same schemas, so they cannot drift.
 

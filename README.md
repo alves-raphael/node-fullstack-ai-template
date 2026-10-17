@@ -5,7 +5,7 @@ An agent skill that scaffolds a blank full stack Node.js monorepo built for AI-a
 The generated project includes:
 
 - Yarn workspaces: `apps/api` (Fastify, Zod, Drizzle, Better Auth), `apps/web` (Vite, React, shadcn/ui), `packages/shared`
-- `apps/api/openapi.json` generated from Zod schemas, with the source file of each endpoint
+- `apps/api/openapi.json` generated from Zod schemas, with params, bodies and every status code of each endpoint
 - Strict TypeScript, ESLint + Prettier, Vitest, Playwright, husky + lint-staged, Conventional Commits
 - Docker Compose for the whole stack, `yarn setup` / `yarn status` / `yarn verify`
 - CI (GitHub Actions) and a Playwright MCP config

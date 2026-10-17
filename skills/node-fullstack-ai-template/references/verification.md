@@ -10,12 +10,12 @@ Run in a scratch copy or the fresh target directory. Stop at the first failure, 
 4. **Env validation**: temporarily remove a required variable and confirm the api fails at boot naming that variable; restore it.
 5. **Database**: migrations applied, seed user exists; running `yarn db:seed` again does not duplicate.
 6. **Verify**: `yarn verify` passes (typecheck, ESLint + Prettier, Vitest, `openapi.json` up to date). Change a route's schema without regenerating and confirm `api:openapi --check` fails, then regenerate.
-7. **OpenAPI content**: `apps/api/openapi.json` lists `/health` and `/me` with operationIds, all response codes, bodies and `x-source-file`.
+7. **OpenAPI content**: `apps/api/openapi.json` lists `/health` and `/me` with operationIds, all response codes and bodies.
 8. **E2E**: `yarn e2e` passes logged in as the seed user. With the environment stopped it fails with the "run `yarn setup`" message instead of hanging.
 9. **Logs**: `docker compose logs api` shows structured request logs. In hybrid mode, `yarn dev:logged` writes `.logs/dev.log`.
 10. **Pre-commit**: stage a file with a lint error and confirm the commit is blocked.
 11. **Redis variant** (only if chosen): `redis` is healthy, `/health` ok, 500 with Redis stopped and ok after starting it again; `yarn verify` passes.
-12. **Agent files**: root, api and web `CLAUDE.md`, `.claude/settings.json`, `.claude/skills/implement-spec/SKILL.md`, `.claude/skills/new-endpoint/SKILL.md`, `.mcp.json`, `docs/specs/_template.md` exist with no `{{placeholder}}` left (`grep -r '{{' .`).
+12. **Agent files**: `CLAUDE.md`, `apps/api/CLAUDE.md` and `apps/web/CLAUDE.md` (exact names, no `.root`/`.api`/`.web` suffix), `.claude/settings.json`, `.claude/skills/implement-spec/SKILL.md`, `.claude/skills/new-endpoint/SKILL.md`, `.mcp.json`, `docs/specs/_template.md` exist with no `{{placeholder}}` left (`grep -r '{{' .`).
 
 ## Frequent breakages to look for
 
