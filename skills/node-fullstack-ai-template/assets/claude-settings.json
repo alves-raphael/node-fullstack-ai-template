@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn verify)",
+      "Bash(yarn test:*)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn typecheck)",
+      "Bash(yarn api:openapi:*)",
+      "Bash(yarn status)",
+      "Bash(yarn setup)",
+      "Bash(yarn e2e:*)",
+      "Bash(docker compose ps:*)",
+      "Bash(docker compose logs:*)",
+      "Bash(tail:*)"
+    ]
+  }
+}
