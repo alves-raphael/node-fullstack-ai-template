@@ -11,7 +11,7 @@
 ├─ .env.example (versioned)  .env (local, gitignored)
 ├─ .nvmrc  .editorconfig  .gitignore
 ├─ .mcp.json
-├─ .claude/                settings.json, commands/, agents/ (optional)
+├─ .claude/                settings.json, skills/{implement-spec,new-endpoint}/, agents/ (optional)
 ├─ .github/workflows/ci.yml
 ├─ .husky/
 ├─ docs/specs/             _template.md + one file per feature

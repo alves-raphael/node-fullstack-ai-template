@@ -29,7 +29,7 @@ The default mode is "everything in Docker". The hybrid mode (db in Docker, api/w
    - `references/tooling.md`: strict TypeScript, ESLint/Prettier, Vitest, husky/lint-staged, CI.
    - `references/backend.md`: Fastify, Zod, OpenAPI, Drizzle, Better Auth, reference module.
    - `references/frontend-and-e2e.md`: Vite/React/shadcn and Playwright.
-3. **Create the structure and files.** Copy the static files from `assets/` and substitute placeholders (`{{PROJECT_NAME}}`, `{{SCOPE}}`, ports). Write the code files following the references. Install dependencies with the package manager (`yarn add`) rather than hardcoding versions from memory, so the project gets current, mutually compatible versions.
+3. **Create the structure and files.** Copy the static files from `assets/` and substitute placeholders (`{{PROJECT_NAME}}`, `{{SCOPE}}`, ports). Write the code files following the references. Install dependencies with the package manager (`yarn add`) rather than hardcoding versions from memory, so the project gets current, mutually compatible versions. The markdown assets are not Prettier-formatted when copied (tables get re-aligned), and `yarn verify` runs `prettier --check`, so run `yarn format` once after copying everything and before the first `yarn verify`.
 4. **Verify against `references/verification.md`.** This is not optional: the template is only done when a clean run of `yarn setup`, `yarn verify` and the e2e smoke test passes. Fix what breaks. Generated projects that were never executed are the main failure mode of scaffolding skills.
 5. **Report** to the user: what was created, how to start (`yarn install && yarn setup`), the URLs table, and anything that could not be verified.
 
@@ -37,7 +37,7 @@ The default mode is "everything in Docker". The hybrid mode (db in Docker, api/w
 
 - `assets/CLAUDE.root.md`, `assets/CLAUDE.api.md`, `assets/CLAUDE.web.md`: the three layered context files. Root holds global rules; api/web hold only what is specific to them.
 - `assets/spec-template.md` -> `docs/specs/_template.md`.
-- `assets/commands/implement-spec.md`, `assets/commands/new-endpoint.md` -> `.claude/commands/`.
+- `assets/skills/implement-spec/SKILL.template.md` -> `.claude/skills/implement-spec/SKILL.md`, and `assets/skills/new-endpoint/SKILL.template.md` -> `.claude/skills/new-endpoint/SKILL.md` (note the rename: the `.template` suffix keeps tools such as `gh skill` from treating these assets as installable skills of this repository). They are project skills: they travel with the generated repo (nobody installs them separately), the model can trigger them from natural language, and they can also be invoked as `/implement-spec <name>` and `/new-endpoint ...`.
 - `assets/claude-settings.json` -> `.claude/settings.json` (pre-approved safe commands).
 - `assets/mcp.json` -> `.mcp.json` (Playwright MCP).
 

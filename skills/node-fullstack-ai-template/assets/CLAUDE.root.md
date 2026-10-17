@@ -2,6 +2,13 @@
 
 Monorepo Yarn workspaces: `apps/api` (Fastify), `apps/web` (Vite/React), `packages/shared` (Zod schemas/types). Each app has its own `CLAUDE.md` with details; this file holds only what applies everywhere.
 
+## Recommended workflows (project skills)
+This project ships two skills in `.claude/skills/`. They hold flows that were validated end to end, so following them is strongly recommended over improvising. You can adapt a step when the situation calls for it; say so in your report.
+- **`implement-spec`** (`/implement-spec <name>`): implement a spec from `docs/specs/`, run the project and prove every acceptance criterion with a test. Use it also when the user asks in plain words ("implement the XPTO spec, run it and test it").
+- **`new-endpoint`** (`/new-endpoint <feature> <METHOD /route>`): add an API endpoint with a complete OpenAPI contract.
+
+If a skill is not available in your session, read its file at `.claude/skills/<name>/SKILL.md` and follow the steps.
+
 ## Commands
 | Command | What it does |
 |---|---|
@@ -34,7 +41,7 @@ The user usually keeps the stack running in their own terminal, which you cannot
 - Only start the environment yourself if `yarn status` shows it is stopped, and tell the user.
 
 ## Working from specs
-Specs live in `docs/specs/<name>.md` (copy `_template.md`): goal, context, endpoints, user flows, acceptance criteria, out of scope. Every acceptance criterion becomes a test: business rules and API in Vitest, user flows in Playwright. Use `/implement-spec <name>`. On finishing, report criterion by criterion what was validated and how.
+Specs live in `docs/specs/<name>.md` (copy `_template.md`): goal, context, endpoints, user flows, acceptance criteria, out of scope. Every acceptance criterion becomes a test: business rules and API in Vitest, user flows in Playwright. Implement them with the `implement-spec` skill (see "Recommended workflows"). On finishing, report criterion by criterion what was validated and how.
 
 ## Rules
 - **Any change to a user flow must be validated with Playwright**: create or update the e2e test and run it before calling the task done.

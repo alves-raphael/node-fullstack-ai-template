@@ -9,7 +9,7 @@ Fastify + TypeScript (strict) + Zod + Drizzle/Postgres + Better Auth. Global rul
 `src/modules/<feature>/{routes.ts,schemas.ts,service.ts,<feature>.test.ts}`. `src/app.ts` builds the app (testable with `app.inject`), `src/server.ts` listens, `src/env.ts` validates env with Zod. Copy `modules/me` as the reference pattern (auth, schemas, all response codes, tests); `modules/health` is the minimal one.
 
 ## Adding an endpoint
-Use `/new-endpoint`. In short: Zod schemas -> route with `operationId`, `tags`, `summary`, and a `response` entry for every status code returned -> service for logic -> Vitest test -> `yarn api:openapi` -> `yarn verify`.
+Strongly recommended: use the `new-endpoint` skill (`/new-endpoint`), which holds the validated steps and keeps `openapi.json` complete. In short: Zod schemas -> route with `operationId`, `tags`, `summary`, and a `response` entry for every status code returned -> service for logic -> Vitest test -> `yarn api:openapi` -> `yarn verify`.
 
 ## Rules
 - Validate everything with Zod schemas on the route; never trust `request.body` untyped.

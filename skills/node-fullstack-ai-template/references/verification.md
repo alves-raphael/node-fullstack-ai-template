@@ -15,7 +15,7 @@ Run in a scratch copy or the fresh target directory. Stop at the first failure, 
 9. **Logs**: `docker compose logs api` shows structured request logs. In hybrid mode, `yarn dev:logged` writes `.logs/dev.log`.
 10. **Pre-commit**: stage a file with a lint error and confirm the commit is blocked.
 11. **Redis variant** (only if chosen): `redis` is healthy, `/health` ok, 500 with Redis stopped and ok after starting it again; `yarn verify` passes.
-12. **Agent files**: root, api and web `CLAUDE.md`, `.claude/settings.json`, `.claude/commands/*`, `.mcp.json`, `docs/specs/_template.md` exist with no `{{placeholder}}` left (`grep -r '{{' .`).
+12. **Agent files**: root, api and web `CLAUDE.md`, `.claude/settings.json`, `.claude/skills/implement-spec/SKILL.md`, `.claude/skills/new-endpoint/SKILL.md`, `.mcp.json`, `docs/specs/_template.md` exist with no `{{placeholder}}` left (`grep -r '{{' .`).
 
 ## Frequent breakages to look for
 
